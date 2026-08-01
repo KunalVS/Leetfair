@@ -89,7 +89,7 @@ During a registered contest session the extension captures:
 Every 15 seconds (and on contest end) the extension batches these events to the
 backend. The backend z-score normalizes each signal against the contest cohort
 and combines them into a weighted suspicion score in
-`backend/src/config/scoring.js`.
+`apps/backend/src/config/scoring.js`.
 
 Submitted code is fingerprinted with a **winnowing** algorithm (k-grams +
 windowed min-hash fingerprints) and compared asynchronously against other
@@ -100,17 +100,19 @@ participants' code and a corpus of known/published solutions. Similarity is a
 
 ```
 /
-├── extension/        Chrome Manifest V3 extension (JavaScript, esbuild)
-│   ├── src/content   signal capture on leetcode.com contest pages
-│   ├── src/background batcher + POST to backend every 15s
-│   └── src/popup     username linking + session status
-├── backend/          Node.js + Express + MongoDB (in-memory by default) (JavaScript)
-│   ├── src/config/scoring.js   <-- ALL weights/score formula live here
-│   ├── src/models    User, ContestSession, Event, SuspicionScore
-│   ├── src/services  verification, winnowing similarity, aggregation, scoring
-│   ├── src/workers   similarity-check worker (in-process queue)
-│   └── src/jobs      scheduled post-contest aggregation
-└── dashboard/        React + Vite moderator + transparency views
+├── apps/
+│   ├── backend/         Node.js + Express + MongoDB (in-memory by default) (JavaScript)
+│   │   ├── src/config/scoring.js   <-- ALL weights/score formula live here
+│   │   ├── src/models    User, ContestSession, Event, SuspicionScore
+│   │   ├── src/services  verification, winnowing similarity, aggregation, scoring
+│   │   ├── src/workers   similarity-check worker (in-process queue)
+│   │   └── src/jobs      scheduled post-contest aggregation
+│   ├── dashboard/        React + Vite moderator + transparency views
+│   └── extension/        Chrome Manifest V3 extension (JavaScript, esbuild)
+│       ├── src/content   signal capture on leetcode.com contest pages
+│       ├── src/background batcher + POST to backend every 15s
+│       └── src/popup     username linking + session status
+└── package.json          npm workspaces (apps/*) + shared scripts
 ```
 
 ## Prerequisites
@@ -125,36 +127,39 @@ instance if you want persistent data.
 
 ## Setup
 
+Everything is one npm workspace. From the repo root:
+
+```bash
+npm install        # installs backend + dashboard + extension
+```
+
+Then run each app:
+
 ### 1. Backend
 
 ```bash
-cd backend
-npm install
-npm run dev                # http://localhost:3000 (in-memory Mongo, no Docker)
+npm run dev:backend     # http://localhost:3000 (in-memory Mongo, no Docker)
 ```
 
-Optional: `cp .env.example .env` and set `MONGODB_URI` to connect to an
-external MongoDB. Leave it empty to keep using the in-memory database.
+Optional: `cp apps/backend/.env.example apps/backend/.env` and set
+`MONGODB_URI` to connect to an external MongoDB. Leave it empty to keep using
+the in-memory database.
 
 ### 2. Dashboard
 
 ```bash
-cd dashboard
-npm install
-npm run dev                # http://localhost:5173 (proxies /api -> :3000)
+npm run dev:dashboard    # http://localhost:5173 (proxies /api -> :3000)
 ```
 
 ### 3. Extension
 
 ```bash
-cd extension
-npm install
-npm run build              # outputs dist/
+npm run build:extension  # outputs apps/extension/dist/
 ```
 
 Open `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**,
-and select `extension/dist`. Pin the LeetFair icon. In the popup, enter your
-LeetCode username and the backend URL, then press **Link account**.
+and select `apps/extension/dist`. Pin the LeetFair icon. In the popup, enter
+your LeetCode username and the backend URL, then press **Link account**.
 
 ### 4. Try it instantly
 
@@ -162,9 +167,8 @@ With the default in-memory database, data lives only while the backend process
 is running, so start the server *with* demo data:
 
 ```bash
-cd backend
 $env:SEED_DEMO = "true"   # PowerShell; export SEED_DEMO=true on macOS/Linux
-npm run dev               # http://localhost:3000 (seeded with demo contest)
+npm run dev:backend       # http://localhost:3000 (seeded with demo contest)
 ```
 
 Then open http://localhost:5173 — the demo contest and its suspicion scores
@@ -208,7 +212,7 @@ print the scores to the terminal.)
 All weights, cutoffs and the weighted-combination math live in a single file:
 
 ```
-backend/src/config/scoring.js
+apps/backend/src/config/scoring.js
 ```
 
 The file is heavily commented: each signal's z-score, how outliers are trimmed,

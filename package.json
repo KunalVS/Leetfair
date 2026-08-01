@@ -3,16 +3,22 @@
   "private": true,
   "version": "0.1.0",
   "description": "LeetFair - opt-in anti-cheat signal aggregation for community coding contests (MERN, plain JavaScript)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "workspaces": [
-    "backend",
-    "dashboard"
+    "apps/*"
   ],
   "scripts": {
-    "dev:backend": "npm --workspace backend run dev",
-    "dev:dashboard": "npm --workspace dashboard run dev",
-    "seed": "npm --workspace backend run seed",
-    "build:extension": "npm --prefix extension run build",
-    "build:all": "npm --workspace dashboard run build && npm run build:extension"
-  },
-  "license": "MIT"
+    "dev:backend": "npm run dev -w @leetfair/backend",
+    "dev:dashboard": "npm run dev -w @leetfair/dashboard",
+    "dev:extension": "npm run watch -w @leetfair/extension",
+    "dev": "npm run dev:backend",
+    "start": "npm run start -w @leetfair/backend",
+    "seed": "npm run seed -w @leetfair/backend",
+    "build:dashboard": "npm run build -w @leetfair/dashboard",
+    "build:extension": "npm run build -w @leetfair/extension",
+    "build": "npm run build:dashboard && npm run build:extension"
+  }
 }

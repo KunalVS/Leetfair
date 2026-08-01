@@ -1,10 +1,25 @@
+# dependencies
 node_modules/
+
+# build output
 dist/
 build/
-*.log
+coverage/
+
+# environment / secrets
 .env
 .env.local
+.env.*.local
+
+# logs
+*.log
+npm-debug.log*
+
+# editor / OS
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
-coverage/
+
+# misc
 *.tsbuildinfo
