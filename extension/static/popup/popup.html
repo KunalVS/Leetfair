@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LeetFair</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <header>
+        <h1>LeetFair</h1>
+        <p class="sub">Opt-in contest integrity</p>
+      </header>
+
+      <section class="card">
+        <label for="username">LeetCode username</label>
+        <input id="username" type="text" placeholder="e.g. ada_lovelace" autocomplete="off" />
+
+        <label for="backendUrl">Backend URL</label>
+        <input id="backendUrl" type="text" placeholder="http://localhost:3000" />
+
+        <button id="save" class="primary">Link account</button>
+        <p id="saveMsg" class="msg"></p>
+      </section>
+
+      <section class="card">
+        <h2>Verify ownership</h2>
+        <p class="hint">
+          Paste the token below into your LeetCode profile bio, then check.
+        </p>
+        <div class="token-row">
+          <code id="token">—</code>
+          <button id="copyToken" title="Copy token">Copy</button>
+        </div>
+        <div class="row">
+          <button id="verifyStart">Start verification</button>
+          <button id="verifyCheck" class="primary">Check bio</button>
+        </div>
+        <p id="verifyMsg" class="msg"></p>
+      </section>
+
+      <section class="card">
+        <h2>Session</h2>
+        <div class="status-row">
+          <span id="statusDot" class="dot"></span>
+          <span id="statusText">idle</span>
+        </div>
+        <button id="refreshStatus">Refresh status</button>
+        <p class="hint">
+          Active while events are buffered. Events are sent to the backend every
+          15 seconds and when your contest session ends.
+        </p>
+      </section>
+
+      <footer>
+        <a href="https://github.com" target="_blank" rel="noreferrer">LeetFair is open source</a>
+        <span class="ethics">opt-in · transparent · triage, not a ban</span>
+      </footer>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
