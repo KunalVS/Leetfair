@@ -41,7 +41,7 @@ export function Moderator() {
   return (
     <section>
       <div className="page-head">
-        <h1>Contest triage</h1>
+        <h1>Contest Assessment</h1>
         <button className="linklike" onClick={() => setShowCreate((s) => !s)}>
           {showCreate ? 'hide' : '+ create contest'}
         </button>

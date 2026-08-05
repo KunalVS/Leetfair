@@ -11,7 +11,6 @@ export function App() {
           <Link to="/">
             <span className="logo">LF</span> LeetFair
           </Link>
-          <span className="tagline">contest integrity · triage for humans</span>
         </div>
         <nav>
           <NavLink to="/" end>
