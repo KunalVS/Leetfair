@@ -1,5 +1,5 @@
 :root {
-  --bg: #0e1116;
+  --bg: #1A1A1A;
   --card: #161b24;
   --border: #242c3a;
   --text: #e7eaf0;
@@ -74,11 +74,11 @@ nav {
 }
 
 nav a {
-  color: var(--muted);
+  color: var(--accent2);
   text-decoration: none;
   padding: 6px 10px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 nav a.active {
@@ -398,13 +398,16 @@ table.plain {
 }
 
 button.primary {
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  background:  var(--accent2);
   border: none;
   color: #fff;
   border-radius: 6px;
-  padding: 8px 14px;
-  font-size: 14px;
+  padding: 10px 14px;
+  font-size: 16px;
   cursor: pointer;
+  width:250px;
+ 
+ 
 }
 
 button.linklike {
@@ -413,19 +416,27 @@ button.linklike {
   color: var(--accent);
   cursor: pointer;
   font-size: 13px;
-  padding: 0;
+
 }
 
 .lookup {
   display: flex;
-  gap: 10px;
-  margin: 16px 0;
+  width:fit-content;
+  
+  flex-direction: column;
+  gap: 30px;
+  margin: 20px 0;
   flex-wrap: wrap;
+  
+  align-items: center;
+  justify-content: center;
+  justify-self: center;;
+  
 }
 
 .lookup input {
-  margin: 0;
-  min-width: 200px;
+  width:500px;
+  padding:10px 20px;
   flex: 1;
 }
 

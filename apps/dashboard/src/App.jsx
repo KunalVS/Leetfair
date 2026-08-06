@@ -13,10 +13,10 @@ export function App() {
           </Link>
         </div>
         <nav>
-          <NavLink to="/" end>
+          <NavLink to="/" end className="nav-mod">
             Moderator
           </NavLink>
-          <NavLink to="/transparency" end>
+          <NavLink to="/transparency" end className="nav-transparency">
             My transparency
           </NavLink>
         </nav>
