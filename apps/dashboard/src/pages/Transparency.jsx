@@ -33,13 +33,9 @@ export function Transparency() {
 
   return (
     <section>
-      <h1>Your transparency report</h1>
+      <h1 className='header'>Your transparency report</h1>
       <p className="hint">
-        LeetFair records behavioral signals only while you participate in an opt-in contest
-        session. Enter your username to see exactly what was recorded and how your suspicion
-        score was derived. This is your right to understand — the score is a triage signal
-        for human review, not a verdict.
-      </p>
+        Enter your username to see what was recorded and how your suspicion score was calculated.      </p>
 
       <form className="lookup" onSubmit={lookUp}>
         <input
