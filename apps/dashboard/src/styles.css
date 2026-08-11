@@ -412,14 +412,23 @@ button.primary {
   background:  var(--accent2);
   border: none;
   color: #fff;
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 16px;
+  border-radius: 12px;
+  padding: 15px 18px;
+  font-size: 18px;
+  font-weight: bold;;
   cursor: pointer;
   width:250px;
+  transform:scale(1);
+ 
  
  
 }
+button.primary:active{
+transform:scale(0.95)
+}
+
+
+
 
 button.linklike {
   background: none;
@@ -447,7 +456,11 @@ button.linklike {
 
 .lookup input {
   width:500px;
-  padding:10px 20px;
+  padding:20px 25px;
+  border-radius: 12px;
+  background-color:var(--accent) ;
+  outline:none;
+  color:#0a0d13;
   flex: 1;
 }
 

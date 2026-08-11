@@ -48,7 +48,9 @@ export function Transparency() {
           value={contestId}
           onChange={(e) => setContestId(e.target.value)}
         />
-        <button type="submit" className="primary">
+        <button type="submit" className="primary" onClick={()=>{
+          
+        }}>
           {loading ? 'Looking up…' : 'View my report'}
         </button>
       </form>
